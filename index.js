@@ -57,7 +57,9 @@ app.get("/getCategories", async (req, res) => {
     }
 
     res.send({ categories });
-  } catch (err) {}
+  } catch (err) {
+    console.log(err)
+  }
 });
 
 app.get("/getAllImages", async (req, res) => {
