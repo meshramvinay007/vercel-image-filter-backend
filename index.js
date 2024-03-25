@@ -83,7 +83,7 @@ app.get("/getAllImages", async (req, res) => {
 
 app.post("/getFilteredImages", async (req, res) => {
   try {
-    const {categories:filteredCategoriees} = req.body;
+    const { categories: filteredCategoriees } = req.body;
     const categoryNames = filteredCategoriees;
     const page = parseInt(req.query.page) || 1;
     const pageSize = 50;
@@ -123,6 +123,8 @@ app.post("/getFilteredImages", async (req, res) => {
   }
 });
 
-app.listen(4000, () => {
+const port = process.env.PORT || 4000;
+
+app.listen(port, () => {
   console.log("App runninng on port 4000");
 });
