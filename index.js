@@ -83,7 +83,8 @@ app.get("/getAllImages", async (req, res) => {
 
 app.post("/getFilteredImages", async (req, res) => {
   try {
-    const categoryNames = req.body.categories;
+    const {categories:filteredCategoriees} = req.body;
+    const categoryNames = filteredCategoriees;
     const page = parseInt(req.query.page) || 1;
     const pageSize = 50;
     const skip = (page - 1) * pageSize;
