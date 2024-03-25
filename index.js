@@ -88,7 +88,7 @@ app.post("/getFilteredImages", async (req, res) => {
     const { categories: filteredCategoriees } = req.body;
     const categoryNames = filteredCategoriees;
     const page = parseInt(req.query.page) || 1;
-    const pageSize = 10;
+    const pageSize = 50;
     const skip = (page - 1) * pageSize;
     const categories = await CategoryModel.find({
       name: { $in: categoryNames },
