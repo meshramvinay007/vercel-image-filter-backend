@@ -5,7 +5,6 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 const app = express();
-// ://<username>:<password>@cluster0.ucjgxf5.mongodb.net
 app.use(bodyParser.json());
 app.use(cors());
 
