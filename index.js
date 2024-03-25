@@ -11,10 +11,7 @@ app.use(cors());
 const connection = `mongodb+srv://${process.env.USER_NAME}:${process.env.PASSWORD}@${process.env.MONGODB_CLUSTER}/ImageFilterDB`;
 
 mongoose
-  .connect(connection, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(connection)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error(err));
 
