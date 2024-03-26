@@ -85,16 +85,18 @@ app.get("/getAllImages", async (req, res) => {
 
 app.post("/getFilteredImages", async (req, res) => {
   try {
-    console.log("Body Request", req.body);
-    const categoryNames = req.body.categories;
+    const mongodbConnection = await mongoose.connect(connection)
+    if("mongodbConnection"){
+      console.log("connected")
+    }
+    const { categories: filteredCategoriees } = req.body;
+    const categoryNames = filteredCategoriees;
     const page = parseInt(req.query.page) || 1;
-    console.log("page", page);
     const pageSize = 50;
     const skip = (page - 1) * pageSize;
     const categories = await CategoryModel.find({
       name: { $in: categoryNames },
     });
-    console.log("categories", categories);
     if (!categories.length) {
       console.log("Categories not found");
     }
@@ -103,8 +105,6 @@ app.post("/getFilteredImages", async (req, res) => {
     const annotations = await AnnotationModel.find({
       categoryId: { $in: categoryIds },
     });
-
-    console.log("annotations", annotations);
 
     // Extract unique imageIds from annotations
     const imageIds = [
@@ -117,8 +117,6 @@ app.post("/getFilteredImages", async (req, res) => {
     const results = await ImageModel.find({ id: { $in: imageIds } })
       .skip(skip)
       .limit(pageSize);
-
-    console.log("images", images);
 
     res.json({
       page,
